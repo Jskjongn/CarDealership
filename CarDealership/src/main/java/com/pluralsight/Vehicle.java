@@ -90,4 +90,11 @@ public class Vehicle {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        // Return the desired format
+        return this.vin + "|" + this.year + "|" + this.make + "|" + this.model + "|" +
+                this.vehicleType + "|" + this.color + "|" + this.odometer + "|" + this.price;
+    }
 }
