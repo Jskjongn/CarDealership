@@ -419,8 +419,32 @@ public class UserInterface {
     public static void processRemoveVehicleRequest(){
 
         // prompts user for vehicle to remove
-        // removes vehicle from list using dealership's .removeVehicle()
+        System.out.println("Enter vehicle details to remove from inventory");
+
+        System.out.print("VIN: ");
+        int vin = userInput.nextInt();
+        userInput.nextLine();
+
+        Vehicle removedVehicle = null;
+        // finds the vehicle and vehicles vin in list
+        for (Vehicle vehicle : dealership.getAllVehicles()) {
+            // if a vehicle vin matches the user inputs vin
+            if (vehicle.getVin() == vin) {
+                // gets the matching vehicle and stores it
+                removedVehicle = vehicle;
+            }
+        }
+
+        // removes stored vehicle from dealership's inventory list using remove method
+        dealership.removeVehicle(removedVehicle);
+
+        // displays the vehicle was removed
+        System.out.printf("Vehicle with VIN #%d was removed!\n", vin);
+        
         // saves the dealership after a vehicle is removed
+        // creates instance of the dealership file manager and removes vehicle to file
+        DealershipFileManager fileManager = new DealershipFileManager();
+        fileManager.saveDealership(dealership);
     }
 
     // ------------------------------------------------------------------------

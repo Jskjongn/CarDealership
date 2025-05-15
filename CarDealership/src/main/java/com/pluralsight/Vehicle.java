@@ -93,7 +93,7 @@ public class Vehicle {
 
     @Override
     public String toString() {
-        // Return the desired format
+        // returns the correct format to display
         return this.vin + "|" + this.year + "|" + this.make + "|" + this.model + "|" +
                 this.vehicleType + "|" + this.color + "|" + this.odometer + "|" + this.price;
     }
