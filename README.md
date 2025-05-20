@@ -61,6 +61,7 @@ The project uses a clean class hierarchy:
 
 ## 📁 Project Structure
 
+```
 CarDealership/
 ├── .idea/                      # IDE configuration folder (e.g., IntelliJ IDEA)
 ├── src/
@@ -83,6 +84,7 @@ CarDealership/
 ├── .gitignore
 ├── pom.xml
 └── README.md
+```
 
 ---
 
