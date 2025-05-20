@@ -14,6 +14,7 @@ public class UserInterface {
     // creates user input scanner
     static Scanner userInput = new Scanner(System.in);
 
+    // displays options to user
     public static void display(){
 
         // calls method that loads the dealership
@@ -35,6 +36,7 @@ public class UserInterface {
                     7 - List ALL vehicles
                     8 - Add a vehicle
                     9 - Remove a vehicle
+                    10 - Sell/Lease a vehicle
                     99 - Quit
                     ---------------------------------------------------
                     """);
@@ -80,6 +82,10 @@ public class UserInterface {
                 // remove vehicle
                 case 9:
                     processRemoveVehicleRequest();
+                    break;
+                // sell or lease vehicle
+                case 10:
+                    processSellOrLeaseVehicleRequest();
                     break;
                 // quits app
                 case 99:
@@ -445,6 +451,109 @@ public class UserInterface {
         // creates instance of the dealership file manager and removes vehicle to file
         DealershipFileManager fileManager = new DealershipFileManager();
         fileManager.saveDealership(dealership);
+    }
+
+    // sell or lease a vehicle
+    public static void processSellOrLeaseVehicleRequest() {
+
+        // prompts user to either sell or lease a vehicle
+        System.out.print("Would you like to Sell or Lease a vehicle: ");
+        String choice = userInput.nextLine().trim().toUpperCase();
+
+        // instantiates contract data manager
+        ContractDataManager dataManager = new ContractDataManager();
+        DealershipFileManager fileManager = new DealershipFileManager();
+
+        // uses user input for switch
+        switch (choice) {
+            case "SELL":
+
+                // if user chose sell then user enters customer details
+                System.out.println("Enter customer details for this Sale: ");
+                System.out.print("Date (yyyy-MM-DD): ");
+                String sellDate = userInput.nextLine();
+
+                System.out.print("Customer Name: ");
+                String sellName = userInput.nextLine();
+
+                System.out.print("Customer Email: ");
+                String sellEmail = userInput.nextLine();
+
+                // user enters vin of vehicle and gets stored and then calls dealership method
+                System.out.print("Vehicle VIN: ");
+                int sellVinInput = userInput.nextInt();
+                userInput.nextLine();
+                // finds the vin and stores it in a vehicle class variable
+                Vehicle sellVin = dealership.getVehicleByVin(sellVinInput);
+
+                // if no vin is found
+                if (sellVin == null) {
+                    System.out.println("Vehicle with VIN: " + sellVinInput + " was not found.");
+                    break;
+                }
+
+                // prompts user if its financed or not
+                System.out.print("Financed (YES/NO): ");
+                String financed = userInput.nextLine().trim().toUpperCase();
+
+                // defaults to no but becomes true if yes
+                boolean isFinanced = false;
+                if (financed.equals("YES")) {
+                    isFinanced = true;
+                }
+
+                // creates new sales contract from user input
+                SalesContract newSale = new SalesContract(sellDate, sellName, sellEmail, sellVin, isFinanced);
+
+                // saves contract and appends new contract by writing to the file
+                dataManager.saveContract(newSale);
+                fileManager.saveDealership(dealership);
+
+                // displays vehicle sold
+                System.out.print("Vehicle: " + sellVin + " was sold successfully!\n");
+
+                break;
+            case "LEASE":
+
+                // if user chose lease then user enters customer details
+                System.out.println("Enter customer details for this Lease: ");
+                System.out.print("Date (yyyy-MM-DD): ");
+                String leaseDate = userInput.nextLine();
+
+                System.out.print("Customer Name: ");
+                String leaseName = userInput.nextLine();
+
+                System.out.print("Customer Email: ");
+                String leaseEmail = userInput.nextLine();
+
+                // user enters vin of vehicle and gets stored and then calls dealership method
+                System.out.print("Vehicle VIN: ");
+                int leaseVinInput = userInput.nextInt();
+                userInput.nextLine();
+                // finds the vin and stores it in a vehicle class variable
+                Vehicle leaseVin = dealership.getVehicleByVin(leaseVinInput);
+
+                // if no vin is found
+                if (leaseVin == null) {
+                    System.out.println("Vehicle with VIN: " + leaseVinInput + " was not found.");
+                    break;
+                }
+
+                // creates new lease contract from user input
+                LeaseContract newLease = new LeaseContract(leaseDate, leaseName, leaseEmail, leaseVin);
+
+                // saves contract and appends new contract by writing to the file
+                dataManager.saveContract(newLease);
+                fileManager.saveDealership(dealership);
+
+                // displays vehicle leased
+                System.out.print("Vehicle: " + leaseVin + " was leased successfully!\n");
+
+                break;
+            default:
+                // prompts user to either enter sell or lease
+                System.out.println("Please enter either Sell or Lease!");
+        }
     }
 
     // ------------------------------------------------------------------------

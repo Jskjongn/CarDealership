@@ -154,6 +154,22 @@ public class Dealership {
         return vehicleTypeList;
     }
 
+    public Vehicle getVehicleByVin(int vin) {
+
+        // loops through inventory and stores it
+        for (int i = 0; i < inventory.size(); i++) {
+            Vehicle vehicle = inventory.get(i);
+            // if vehicle vin matches user input vin, it removes vehicle and returns it
+            if (vehicle.getVin() == vin) {
+                removeVehicle(vehicle);
+                return vehicle;
+            }
+        }
+
+        // if no vin is found
+        return null;
+    }
+
     // returns the whole inventory
     public ArrayList<Vehicle> getAllVehicles(){
         return inventory;
@@ -164,6 +180,7 @@ public class Dealership {
     // other methods
     // adds a vehicle to the inventory
     public void addVehicle(Vehicle vehicle){
+
         inventory.add(vehicle);
     }
 
