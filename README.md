@@ -90,14 +90,14 @@ CarDealership/
 
 ## 🖼️ Screenshots
 
-### Home Screen
+### 🏠 Home Screen
 ![image](https://github.com/user-attachments/assets/ac4debb7-fe1e-4c08-a2d1-e1abe3d6044c)
 
-### Adding Vehicle
+### 🚗 Adding Vehicle
 ![image](https://github.com/user-attachments/assets/98e76748-545d-443e-ae1e-00e81a01af4c)
 
-### Removing Vehicle
+### 🚗 Removing Vehicle
 ![image](https://github.com/user-attachments/assets/134bcced-473f-40ae-8680-ab592cff879c)
 
-### Sell/Lease Vehicle
+### 💳 Sell/Lease Vehicle
 ![image](https://github.com/user-attachments/assets/0a8a1d68-ff00-4f7b-bebc-ffe32babb473)
